@@ -18,7 +18,16 @@
       </div>
       <div>
         <br>
-        {% gizmo select_input regions %}
+        {% gizmo select_input2 regions %}
+      </div>
+      <div>
+        {% gizmo select_input2 provinces %}
+      </div>
+      <div>
+        {% gizmo select_input2 basins %}
+      </div>
+      <div>
+        {% gizmo select_input2 subbasins %}
       </div>
     </div>
   </div>
@@ -56,26 +65,12 @@
         </div>
         <div class="modal-body">
           <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a id="hydrographs_tab_link" href="#hydrographs" aria-controls="hydrographs" role="tab" data-toggle="tab">Hydrographs</a></li>
-            <li role="presentation"><a id="forecast_tab_link" href="#forecast" aria-controls="forecast" role="tab" data-toggle="tab">Forecast</a></li>
+            <li role="presentation" class="active"><a id="forecast_tab_link" href="#forecast" aria-controls="forecast" role="tab" data-toggle="tab">Forecast</a></li>
+            <li role="presentation"><a id="hydrographs_tab_link" href="#hydrographs" aria-controls="hydrographs" role="tab" data-toggle="tab">Hydrographs</a></li>
           </ul>
           <!-- Tab panes -->
           <div class="tab-content">
-            <div role="tabpanel" class="tab-pane active" id="hydrographs">
-              <div class="panel panel-default">
-                <div class="flex-container-row"><img id="hydrographs-loading" class="view-file hidden" src="{% static 'sonics_hydroviewer/images/loader.gif' %}" /></div>
-                <div id="hydrographs-chart"></div>
-                <p> Download Data </p>
-                <div id="Download_hydrographs">
-                  <div id="download_simulated_discharge" class="btn-group hidden" role="group">
-                    <a class="btn btn-info" role="button" id="submit-download-simulated-discharge">
-                      <span class="glyphicon glyphicon-play"></span> Simulated Discharge
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div role="tabpanel" class="tab-pane" id="forecast">
+            <div role="tabpanel" class="tab-pane active" id="forecast">
               <div class="panel panel-default">
                 <div class="panel-body">
                   <div id="dates" class="hidden form-group" style="padding: 30px 30px 20px 0">
@@ -86,6 +81,20 @@
                   <div id="download_forecast" class="btn-group hidden" role="group">
                     <a class="btn btn-info" role="button" id="submit-download-forecast">
                       <span class="glyphicon glyphicon-play"></span> Download Forecast
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="hydrographs">
+              <div class="panel panel-default">
+                <div class="flex-container-row"><img id="hydrographs-loading" class="view-file hidden" src="{% static 'sonics_hydroviewer/images/loader.gif' %}" /></div>
+                <div id="hydrographs-chart"></div>
+                <p> Download Data </p>
+                <div id="Download_hydrographs">
+                  <div id="download_simulated_discharge" class="btn-group hidden" role="group">
+                    <a class="btn btn-info" role="button" id="submit-download-simulated-discharge">
+                      <span class="glyphicon glyphicon-play"></span> Simulated Discharge
                     </a>
                   </div>
                 </div>

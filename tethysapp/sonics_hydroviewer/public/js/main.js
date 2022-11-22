@@ -34,17 +34,16 @@ function toggleAcc(layerID) {
 }
 
 function init_map() {
+
     var base_layer = new ol.layer.Tile({
-        source: new ol.source.BingMaps({
-            key: 'eLVu8tDRPeQqmBlKAjcw~82nOqZJe2EpKmqd-kQrSmg~AocUZ43djJ-hMBHQdYDyMbT-Enfsk0mtUIGws1WeDuOvjY4EXCH-9OK3edNLDgkc',
-            imagerySet: 'Road'
+        source: new ol.source.OSM({
         })
-    })
+    });
 
     var streams = new ol.layer.Image({
 		source: new ol.source.ImageWMS({
-			url: 'https://senamhi.westus2.cloudapp.azure.com/geoserver/peru_hydroviewer/wms',
-			//url: 'https://geoserver.hydroshare.org/geoserver/HS-9b6a7f2197ec403895bacebdca4d0074/wms',
+			//url: 'https://senamhi.westus2.cloudapp.azure.com/geoserver/peru_hydroviewer/wms',
+			url: 'https://geoserver.hydroshare.org/geoserver/HS-9b6a7f2197ec403895bacebdca4d0074/wms',
 			params: { 'LAYERS': 'south_america-peru-geoglows-drainage_line' },
 			serverType: 'geoserver',
 			crossOrigin: 'Anonymous'
@@ -335,6 +334,111 @@ function getRegionGeoJsons() {
     }
 }
 
+function getProvinceGeoJsons() {
+
+    let geojsons = region_index2[$("#provinces").val()]['geojsons'];
+    for (let i in geojsons) {
+        var regionsSource = new ol.source.Vector({
+           url: staticGeoJSON2 + geojsons[i],
+           format: new ol.format.GeoJSON()
+        });
+
+        var regionStyle = new ol.style.Style({
+            stroke: new ol.style.Stroke({
+                color: 'red',
+                width: 3
+            })
+        });
+
+        var regionsLayer = new ol.layer.Vector({
+            name: 'myRegion',
+            source: regionsSource,
+            style: regionStyle
+        });
+
+        map.getLayers().forEach(function(regionsLayer) {
+        if (regionsLayer.get('name')=='myRegion')
+            map.removeLayer(regionsLayer);
+        });
+        map.addLayer(regionsLayer)
+
+        setTimeout(function() {
+            var myExtent = regionsLayer.getSource().getExtent();
+            map.getView().fit(myExtent, map.getSize());
+        }, 500);
+    }
+}
+
+function getBasinGeoJsons() {
+
+    let basins = region_index3[$("#basins").val()]['geojsons'];
+    for (let i in basins) {
+        var regionsSource = new ol.source.Vector({
+           url: staticGeoJSON3 + basins[i],
+           format: new ol.format.GeoJSON()
+        });
+
+        var regionStyle = new ol.style.Style({
+            stroke: new ol.style.Stroke({
+                color: '#0050a0',
+                width: 3
+            })
+        });
+
+        var regionsLayer = new ol.layer.Vector({
+            name: 'myRegion',
+            source: regionsSource,
+            style: regionStyle
+        });
+
+        map.getLayers().forEach(function(regionsLayer) {
+        if (regionsLayer.get('name')=='myRegion')
+            map.removeLayer(regionsLayer);
+        });
+        map.addLayer(regionsLayer)
+
+        setTimeout(function() {
+            var myExtent = regionsLayer.getSource().getExtent();
+            map.getView().fit(myExtent, map.getSize());
+        }, 500);
+    }
+}
+
+function getSubBasinGeoJsons() {
+
+    let subbasins = region_index4[$("#subbasins").val()]['geojsons'];
+    for (let i in subbasins) {
+        var regionsSource = new ol.source.Vector({
+           url: staticGeoJSON4 + subbasins[i],
+           format: new ol.format.GeoJSON()
+        });
+
+        var regionStyle = new ol.style.Style({
+            stroke: new ol.style.Stroke({
+                color: '#009C3B',
+                width: 3
+            })
+        });
+
+        var regionsLayer = new ol.layer.Vector({
+            name: 'myRegion',
+            source: regionsSource,
+            style: regionStyle
+        });
+
+        map.getLayers().forEach(function(regionsLayer) {
+        if (regionsLayer.get('name')=='myRegion')
+            map.removeLayer(regionsLayer);
+        });
+        map.addLayer(regionsLayer)
+
+        setTimeout(function() {
+            var myExtent = regionsLayer.getSource().getExtent();
+            map.getView().fit(myExtent, map.getSize());
+        }, 500);
+    }
+}
+
 $('#stp-stream-toggle').on('change', function() {
     wmsLayer.setVisible($('#stp-stream-toggle').prop('checked'))
 })
@@ -344,3 +448,6 @@ $('#stp-stations-toggle').on('change', function() {
 
 // Regions gizmo listener
 $('#regions').change(function() {getRegionGeoJsons()});
+$('#provinces').change(function() {getProvinceGeoJsons()});
+$('#basins').change(function() {getBasinGeoJsons()});
+$('#subbasins').change(function() {getSubBasinGeoJsons()});

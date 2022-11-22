@@ -58,13 +58,54 @@ def home(request):
 		display_text='Zoom to a Region:',
 		name='regions',
 		multiple=False,
-		original=True,
-		options=[(region_index[opt]['name'], opt) for opt in region_index]
+		#original=True,
+		options=[(region_index[opt]['name'], opt) for opt in region_index],
+        initial='',
+        select2_options={'placeholder': 'Select a Region', 'allowClear': False}
+	)
+
+	# Select Province
+	province_index = json.load(open(os.path.join(os.path.dirname(__file__), 'public', 'geojson2', 'index2.json')))
+	provinces = SelectInput(
+		display_text='Zoom to a Province:',
+		name='provinces',
+		multiple=False,
+		# original=True,
+		options=[(province_index[opt]['name'], opt) for opt in province_index],
+		initial='',
+		select2_options={'placeholder': 'Select a Province', 'allowClear': False}
+	)
+
+	# Select Basins
+	basin_index = json.load(open(os.path.join(os.path.dirname(__file__), 'public', 'geojson3', 'index3.json')))
+	basins = SelectInput(
+		display_text='Zoom to a Basin:',
+		name='basins',
+		multiple=False,
+		# original=True,
+		options=[(basin_index[opt]['name'], opt) for opt in basin_index],
+		initial='',
+		select2_options={'placeholder': 'Select a Basin', 'allowClear': False}
+	)
+
+	# Select SubBasins
+	subbasin_index = json.load(open(os.path.join(os.path.dirname(__file__), 'public', 'geojson4', 'index4.json')))
+	subbasins = SelectInput(
+		display_text='Zoom to a Subbasin:',
+		name='subbasins',
+		multiple=False,
+		# original=True,
+		options=[(subbasin_index[opt]['name'], opt) for opt in subbasin_index],
+		initial='',
+		select2_options={'placeholder': 'Select a Subbasin', 'allowClear': False}
 	)
 
 	context = {
 		"date_picker": date_picker,
-		"regions": regions
+		"regions": regions,
+		"provinces": provinces,
+		"basins": basins,
+		"subbasins": subbasins,
 	}
 
 	return render(request, 'sonics_hydroviewer/home.html', context)
@@ -341,7 +382,7 @@ def get_time_series(request):
 
 		'''Adding Recent Days'''
 		records_df = historical_simulation_df.loc[
-			historical_simulation_df.index >= pd.to_datetime(startdate - dt.timedelta(days=8))]
+			historical_simulation_df.index >= pd.to_datetime(startdate - dt.timedelta(days=4))]
 		records_df = records_df.loc[records_df.index <= pd.to_datetime(startdate + dt.timedelta(days=2))]
 
 		if len(records_df.index) > 0:

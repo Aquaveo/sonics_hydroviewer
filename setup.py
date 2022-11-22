@@ -16,7 +16,7 @@ resource_files += find_resource_files('tethysapp/' + app_package + '/workspaces'
 
 setup(
     name=release_package,
-    version='1.0',
+    version='1.1',
     description='',
     long_description='',
     keywords='"Hydrology", "SONICS", "Hydroviewer", "Peru"',
