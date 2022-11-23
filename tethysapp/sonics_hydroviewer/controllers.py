@@ -2,7 +2,7 @@ from tethys_sdk.gizmos import *
 from django.shortcuts import render
 from tethys_sdk.gizmos import PlotlyView
 from django.http import HttpResponse, JsonResponse
-
+from tethys_sdk.routing import controller
 import os
 import sys
 import json
@@ -19,6 +19,7 @@ import plotly.graph_objs as go
 from .app import SonicsHydroviewer as app
 
 
+@controller(name='home',url='sonics-hydroviewer')
 def home(request):
 	"""
 	Controller for the app home page.
@@ -126,7 +127,7 @@ def gve_1(loc: float, scale: float, shape: float, rp: int or float) -> float:
 
 	return ((scale / shape) * (1 - math.exp(shape * (math.log(-math.log(1 - (1 / rp))))))) + loc
 
-
+@controller(name='get_hydrographs',url='sonics-hydroviewer/get-hydrographs')
 def get_hydrographs(request):
 	try:
 		get_data = request.GET
@@ -229,7 +230,7 @@ def get_hydrographs(request):
 			'error': f'{"error: " + str(e), "line: " + str(exc_tb.tb_lineno)}',
 		})
 
-
+@controller(name='get_simulated_discharge_csv',url='sonics-hydroviewer/get-simulated-discharge-csv')
 def get_simulated_discharge_csv(request):
 	"""
 	Get historic simulations from ERA Interim
@@ -271,7 +272,7 @@ def get_simulated_discharge_csv(request):
 			'error': f'{"error: " + str(e), "line: " + str(exc_tb.tb_lineno)}',
 		})
 
-
+@controller(name='get-time-series',url='sonics-hydroviewer/get-time-series')
 def get_time_series(request):
 	try:
 		get_data = request.GET
@@ -453,6 +454,7 @@ def get_time_series(request):
 			'error': f'{"error: " + str(e), "line: " + str(exc_tb.tb_lineno)}',
 		})
 
+@controller(name='get_forecast_data_csv',url='sonics-hydroviewer/get-forecast-data-csv')
 def get_forecast_data_csv(request):
 	"""""
 	Returns Forecast data as csv
