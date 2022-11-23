@@ -7,7 +7,7 @@ class SonicsHydroviewer(TethysAppBase):
     """
 
     name = 'SONICS Hydroviewer'
-    index = 'sonics_hydroviewer:home'
+    index = 'home'
     icon = 'sonics_hydroviewer/images/sonics_hydroviewer_logo.png'
     package = 'sonics_hydroviewer'
     root_url = 'sonics-hydroviewer'
