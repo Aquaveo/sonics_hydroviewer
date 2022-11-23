@@ -150,7 +150,7 @@
               <div class="panel-body">
                 <div
                   id="dates"
-                  class="hidden form-group"
+                  class="d-none form-group"
                   style="padding: 30px 30px 20px 0"
                 >
                   {% gizmo date_picker %}
@@ -158,14 +158,14 @@
                 <div class="flex-container-row">
                   <img
                     id="forecast-loading"
-                    class="view-file hidden"
+                    class="view-file d-none"
                     src="{% static 'sonics_hydroviewer/images/loader.gif' %}"
                   />
                 </div>
                 <div id="forecast-chart"></div>
                 <div
                   id="download_forecast"
-                  class="btn-group hidden"
+                  class="btn-group d-none"
                   role="group"
                 >
                   <a
@@ -185,7 +185,7 @@
               <div class="flex-container-row">
                 <img
                   id="hydrographs-loading"
-                  class="view-file hidden"
+                  class="view-file d-none"
                   src="{% static 'sonics_hydroviewer/images/loader.gif' %}"
                 />
               </div>
@@ -194,7 +194,7 @@
               <div id="Download_hydrographs">
                 <div
                   id="download_simulated_discharge"
-                  class="btn-group hidden"
+                  class="btn-group d-none"
                   role="group"
                 >
                   <a
@@ -211,7 +211,7 @@
           </div>
         </div>
       </div>
-      <div id="info" class="hidden"></div>
+      <div id="info" class="d-none"></div>
       <div class="modal-footer">
         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
           Close
