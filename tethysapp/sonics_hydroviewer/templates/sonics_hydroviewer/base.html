@@ -1,14 +1,34 @@
-{% extends "tethys_apps/app_base.html" %} {% load static %} {% load statics %}
-{% load tethys_gizmos %} {% block title %}{{ tethys_app.name }}{% endblock %} {%
-block app_icon %} {# The path you provided in your app.py is accessible through
-the tethys_app.icon context variable #}
+{% extends "tethys_apps/app_base.html" %} 
+{% load static %} {% load statics %}
+{% load tethys_gizmos %} 
+{% block title %}
+{{ tethys_app.name }}
+{% endblock %} 
+{% block app_icon %} {# The path you provided in your app.py is accessible through the tethys_app.icon context variable #}
 <img src="{% static tethys_app.icon %}" />
 <!--<img src="{% if 'http' in tethys_app.icon %}{{ tethys_app.icon }}{% else %}{% static tethys_app.icon %}{% endif %}" />-->
-{% endblock %} {# The name you provided in your app.py is accessible through the
-tethys_app.name context variable #} {% block app_title %}{{ tethys_app.name }}{%
-endblock %} {% block app_navigation_items %} {% endblock %} {% block app_content
-%} {% endblock %} {% block app_actions %} {% endblock %} {% block
-content_dependent_styles %} {{ block.super }}
+{% endblock %} {# The name you provided in your app.py is accessible through the tethys_app.name context variable #}
+
+{% block app_title %}
+
+{{ tethys_app.name }}
+
+{%endblock %} 
+
+{% block app_navigation_items %} 
+
+{% endblock %} 
+
+{% block app_content %} 
+
+{% endblock %} 
+
+{% block app_actions %} 
+{% endblock %} 
+
+{% block content_dependent_styles %} 
+
+{{ block.super }}
 <link
   href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css"
   rel="stylesheet"
@@ -18,7 +38,11 @@ content_dependent_styles %} {{ block.super }}
   rel="stylesheet"
 />
 <link href="{% static 'sonics_hydroviewer/css/main.css' %}" rel="stylesheet" />
-{% endblock %} {% block scripts %} {{ block.super }}
+{% endblock %} 
+
+{% block scripts %} 
+
+{{ block.super }}
 <script>
   var staticGeoJSON = "{% static 'sonics_hydroviewer/geojson/' %}";
   var staticGeoJSON2 = "{% static 'sonics_hydroviewer/geojson2/' %}";
